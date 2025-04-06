@@ -30,6 +30,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  http: ^1.0.0
+  get_storage: ^2.1.1
+  quickalert: ^1.0.0
+  top_snackbar_flutter: ^3.1.0
+  smart_snackbars: ^1.0.0
+  google_fonts: ^6.2.1
+  flutter_bloc: ^9.1.0
+
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -88,3 +96,9 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+
+  assets:
+    - assets/AppLogo.png
+    - assets/HorizontalAppLogo.png
+    - assets/AppLogoWithText.png

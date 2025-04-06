@@ -1,0 +1,2 @@
+C:/Teste DS/Vaga Flutter/FakeStoreApp/android/app/.cxx/Debug/48671j6l/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Teste DS/Vaga Flutter/FakeStoreApp/android/app/.cxx/Debug/48671j6l/armeabi-v7a/CMakeFiles/rebuild_cache.dir
