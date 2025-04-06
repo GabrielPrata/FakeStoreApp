@@ -5,7 +5,7 @@ import 'package:fake_store_app/util/constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:fake_store_app/Domain/auth_model.dart';
 
-class HomeScreenRepository {
+class AuthRepository {
   // final AuthModel userAuthData = AuthModel.empty();
 
   Future<AuthModel> authUser(AuthModel userAuthData) async {

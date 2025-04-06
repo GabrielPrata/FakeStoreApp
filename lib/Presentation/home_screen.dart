@@ -1,13 +1,13 @@
 import 'package:fake_store_app/Domain/auth_model.dart';
-import 'package:fake_store_app/Repository/home_screen_repository.dart';
-import 'package:fake_store_app/Service/bloc/home_screen/home_screen_bloc.dart';
-import 'package:fake_store_app/Service/bloc/home_screen/home_screen_event.dart';
-import 'package:fake_store_app/Service/bloc/home_screen/home_screen_state.dart';
+import 'package:fake_store_app/Presentation/select_seller_screen.dart';
+import 'package:fake_store_app/Repository/auth_repository.dart';
+import 'package:fake_store_app/Service/bloc/auth/auth_bloc.dart';
+import 'package:fake_store_app/Service/bloc/auth/auth_event.dart';
+import 'package:fake_store_app/Service/bloc/auth/auth_state.dart';
 import 'package:fake_store_app/util/alerts.dart';
 import 'package:fake_store_app/util/api_error_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -23,16 +23,16 @@ String? errorText;
 bool passIsEnabled = false;
 
 class _HomeScreenState extends State<HomeScreen> {
-  late final HomeScreenBloc _homeScreenBloc;
-  late final HomeScreenRepository _homeScreenRepository;
+  late final AuthBloc _authBloc;
+  late final AuthRepository _authBlocRepository;
 
   @override
   void initState() {
     super.initState();
     userController.clear();
     passController.clear();
-    _homeScreenRepository = HomeScreenRepository();
-    _homeScreenBloc = HomeScreenBloc(repository: _homeScreenRepository);
+    _authBlocRepository = AuthRepository();
+    _authBloc = AuthBloc(repository: _authBlocRepository);
   }
 
   @override
@@ -44,14 +44,21 @@ class _HomeScreenState extends State<HomeScreen> {
         return;
       }
 
-      _homeScreenBloc.add(PostAuthUser(
+      _authBloc.add(PostAuthUser(
           userAuthData: AuthModel(
               username: userController.text, password: passController.text)));
 
       print("FEZ LOGIN PORRAAAAAAAAAAAAA");
     }
 
-    realizaCadastro() {}
+    selectSellerRedirect(){
+        Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => SelectSellerScreen(),
+      ),
+      );
+    }
 
     showPass() {
       setState(() {
@@ -60,10 +67,10 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     return Scaffold(
-      body: BlocBuilder<HomeScreenBloc, HomeScreenState>(
-        bloc: _homeScreenBloc,
+      body: BlocBuilder<AuthBloc, AuthState>(
+        bloc: _authBloc,
         builder: (context, state) {
-          if (state is HomeScreenErrorState) {
+          if (state is AuthErrorState) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               if (state.exception is ApiErrorException) {
                 final error = state.exception as ApiErrorException;
@@ -159,10 +166,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       ElevatedButton(
                         style: Theme.of(context).filledButtonTheme.style,
-                        onPressed: state is HomeScreenLoadingState
+                        onPressed: state is AuthLoadingState
                             ? null
                             : () => validaLogin(),
-                        child: state is HomeScreenLoadingState
+                        child: state is AuthLoadingState
                             ? SizedBox(
                                 width: 24,
                                 height: 24,
@@ -181,7 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 10,
                       ),
                       OutlinedButton(
-                        onPressed: () => realizaCadastro(),
+                        onPressed: () => selectSellerRedirect(),
                         child: Text(
                           "CONTINUAR COMO VENDEDOR",
                           style: Theme.of(context).textTheme.labelMedium,
@@ -203,7 +210,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    _homeScreenBloc.close();
+    _authBloc.close();
     super.dispose();
   }
 }

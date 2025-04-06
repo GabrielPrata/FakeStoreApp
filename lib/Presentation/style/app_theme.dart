@@ -32,17 +32,17 @@ class AppTheme {
       ),
       textTheme: TextTheme(
         titleLarge: GoogleFonts.montserrat(
-          fontSize: calculate(36),
+          fontSize: calculate(30),
           fontWeight: FontWeight.w900,
           color: Colors.white,
         ),
         titleMedium: GoogleFonts.montserrat(
-          fontSize: calculate(32),
+          fontSize: calculate(26),
           fontWeight: FontWeight.w900,
           color: Colors.white,
         ),
         titleSmall: GoogleFonts.montserrat(
-          fontSize: calculate(26),
+          fontSize: calculate(20),
           fontWeight: FontWeight.w900,
           color: Colors.white,
         ),
