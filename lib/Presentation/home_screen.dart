@@ -1,7 +1,9 @@
+import 'package:fake_store_app/Domain/auth_model.dart';
 import 'package:fake_store_app/Presentation/admin_screen.dart';
 import 'package:fake_store_app/Presentation/select_seller_screen.dart';
 import 'package:fake_store_app/Repository/auth_repository.dart';
 import 'package:fake_store_app/Service/bloc/auth/auth_bloc.dart';
+import 'package:fake_store_app/Service/bloc/auth/auth_event.dart';
 import 'package:fake_store_app/Service/bloc/auth/auth_state.dart';
 import 'package:fake_store_app/util/alerts.dart';
 import 'package:fake_store_app/util/api_error_model.dart';
@@ -35,20 +37,20 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     validaLogin() {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const AdminScreen()),
-      );
+      // Navigator.pushReplacement(
+      //   context,
+      //   MaterialPageRoute(builder: (_) => const AdminScreen()),
+      // );
 
-      // if (_userController.text.isEmpty || _passController.text.isEmpty) {
-      //   Alerts.showErrorSnackBar(
-      //       "Preencha os campos de usuário e senha!", context);
-      //   return;
-      // }
+      if (_userController.text.isEmpty || _passController.text.isEmpty) {
+        Alerts.showErrorSnackBar(
+            "Preencha os campos de usuário e senha!", context);
+        return;
+      }
 
-      // _authBloc.add(PostAuthUser(
-      //     userAuthData: AuthModel(
-      //         username: _userController.text, password: _passController.text,)));
+      _authBloc.add(PostAuthUser(
+          userAuthData: AuthModel(
+              username: _userController.text, password: _passController.text,)));
     }
 
     selectSellerRedirect() {
