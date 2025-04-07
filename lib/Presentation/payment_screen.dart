@@ -67,12 +67,20 @@ class _PaymentScreenState extends State<PaymentScreen> {
           context);
       return;
     }
-    UserModel userData = UserModel.fromGetXJson(box.read("sellerData"));
+
+    UserModel userData;
+    if (box.read("sellerData") != null) {
+      userData = UserModel.fromGetXJson(box.read("sellerData"));
+    } else {
+      //Como a fakeAPI nao me retorna os dados do usuário ao fazer login (pela endpoint de autenticacao), deixarei os dados mockados.
+      //Se ao menos o ID fosse retornado, daria para fazer uma busca e obter os dados
+      userData = UserModel(id: 0, firstName: "Admin", lastName: "Admin", email: "admin@mail.com", username: "admin", password: "admin");
+    }
+
     CartModel cartData = CartModel(
         id: Random().nextInt(999),
         userId: userData.id,
         products: widget.productsCart);
-
 
     if (box.read('adminLogged') == null) {
       _cartBloc.add(PostCart(cartData: cartData));
