@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/d8b95101-112e-4779-ab24-e05674861278)# 🛍️ Fake Store
+# 🛍️ Fake Store
 
 Projeto desenvolvido como parte de uma avaliação técnica. Trata-se de um aplicativo Flutter que consome a [Fake Store API](https://fakestoreapi.com/) para exibir uma lista de produtos, aplicar filtros por categoria, realizar buscas e gerenciar um carrinho de compras. Também há uma tela administrativa para visualização de pedidos. 
 <br>
@@ -42,11 +42,12 @@ flutter run
 - Conexão com a internet (Para consumo da API)
 
 ## Algumas SnapShots do projeto
-![image](https://github.com/user-attachments/assets/f59367ad-caa6-44e9-beb5-6f7db0ffb90a)
-![image](https://github.com/user-attachments/assets/b4f55ceb-1339-4813-859a-9e5d1a7d88ec)
-![image](https://github.com/user-attachments/assets/5a6fe156-c071-4ac7-8650-b8650686dddd)
-![image](https://github.com/user-attachments/assets/b4bf572f-f6eb-4cb9-a827-90b9c98b34d3)
-![image](https://github.com/user-attachments/assets/e3861873-085d-4177-b7a1-7b2e207ce86d)
+<img src="https://github.com/user-attachments/assets/f59367ad-caa6-44e9-beb5-6f7db0ffb90a" width="300"/>
+<img src="https://github.com/user-attachments/assets/b4f55ceb-1339-4813-859a-9e5d1a7d88ec" width="300"/>
+<img src="https://github.com/user-attachments/assets/5a6fe156-c071-4ac7-8650-b8650686dddd" width="300"/>
+<img src="https://github.com/user-attachments/assets/b4bf572f-f6eb-4cb9-a827-90b9c98b34d3" width="300"/>
+<img src="https://github.com/user-attachments/assets/e3861873-085d-4177-b7a1-7b2e207ce86d" width="300"/>
+<img src="https://github.com/user-attachments/assets/d8b95101-112e-4779-ab24-e05674861278" width="300"/>
 
 
 
