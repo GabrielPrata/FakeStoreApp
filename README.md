@@ -2,7 +2,7 @@
 
 Projeto desenvolvido como parte de uma avaliação técnica. Trata-se de um aplicativo Flutter que consome a [Fake Store API](https://fakestoreapi.com/) para exibir uma lista de produtos, aplicar filtros por categoria, realizar buscas e gerenciar um carrinho de compras. Também há uma tela administrativa para visualização de pedidos. 
 <br>
-A UI foi prototipada através do Figma. Para acessar ao projeto, clique [Aqui](https://fakestoreapi.com/](https://www.figma.com/design/Z9hDZ2kpnpbSCiezg3E1BL/FakeApp-UI?node-id=0-1&t=Ba4uwgPHTPFSqidV-1)
+A UI foi prototipada através do Figma. Para acessar ao projeto: https://fakestoreapi.com/](https://www.figma.com/design/Z9hDZ2kpnpbSCiezg3E1BL/FakeApp-UI?node-id=0-1&t=Ba4uwgPHTPFSqidV-1
 
 ## 🚀 Funcionalidades
 
