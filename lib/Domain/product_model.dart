@@ -19,7 +19,6 @@ class ProductModel {
       required this.totalReviews});
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
-    print(json);
     return ProductModel(
       id: json['id'],
       title: json['title'],
@@ -30,5 +29,19 @@ class ProductModel {
       rate: (json['rating']['rate'] as num).toDouble(),
       totalReviews: json['rating']['count'],
     );
+  }
+
+  @override
+  String toString() {
+    return 'ProductModel('
+        'id: $id, '
+        'title: "$title", '
+        'price: $price, '
+        'description: "$description", '
+        'category: "$category", '
+        'image: "$image", '
+        'rate: $rate, '
+        'totalReviews: $totalReviews'
+        ')';
   }
 }

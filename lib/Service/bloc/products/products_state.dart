@@ -16,10 +16,9 @@ class ProductsLoadingState extends ProductsState {
 
 class ProductsLoadedState extends ProductsState {
   ProductsLoadedState({required List<ProductModel> productsData})
-    : super(productsData: productsData);
+      : super(productsData: productsData);
 }
-
 class ProductsErrorState extends ProductsState {
   final Exception exception;
-  ProductsErrorState({required this.exception}) : super(productsData: []); 
+  ProductsErrorState({required this.exception}) : super(productsData: []);
 }

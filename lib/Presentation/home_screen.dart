@@ -16,8 +16,8 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-TextEditingController userController = TextEditingController();
-TextEditingController passController = TextEditingController();
+TextEditingController _userController = TextEditingController();
+TextEditingController _passController = TextEditingController();
 // AuthController authController = Get.put(AuthController());
 String? errorText;
 bool passIsEnabled = false;
@@ -29,8 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    userController.clear();
-    passController.clear();
+    _userController.clear();
+    _passController.clear();
     _authBlocRepository = AuthRepository();
     _authBloc = AuthBloc(repository: _authBlocRepository);
   }
@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     validaLogin() {
-      if (userController.text.isEmpty || passController.text.isEmpty) {
+      if (_userController.text.isEmpty || _passController.text.isEmpty) {
         Alerts.showErrorSnackBar(
             "Preencha os campos de usuário e senha!", context);
         return;
@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
       _authBloc.add(PostAuthUser(
           userAuthData: AuthModel(
-              username: userController.text, password: passController.text)));
+              username: _userController.text, password: _passController.text)));
 
       print("FEZ LOGIN PORRAAAAAAAAAAAAA");
     }
@@ -104,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: MediaQuery.of(context).size.height * 0.05,
                 ),
                 TextField(
-                  controller: userController,
+                  controller: _userController,
                   style: Theme.of(context).textTheme.labelSmall,
                   cursorColor: Theme.of(context).colorScheme.surface,
                   keyboardType: TextInputType.text,
@@ -128,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 TextField(
                   style: Theme.of(context).textTheme.labelSmall,
-                  controller: passController,
+                  controller: _passController,
                   cursorColor: Theme.of(context).colorScheme.surface,
                   keyboardType: TextInputType.text,
                   obscureText: !passIsEnabled,

@@ -1,4 +1,7 @@
+import 'package:fake_store_app/Domain/product_model.dart';
+import 'package:fake_store_app/Presentation/style/app_theme.dart';
 import 'package:fake_store_app/Presentation/widgets/app_header_products.dart';
+import 'package:fake_store_app/Presentation/widgets/category_filter.dart';
 import 'package:fake_store_app/Presentation/widgets/product_card.dart';
 import 'package:fake_store_app/Repository/products_repository.dart';
 import 'package:fake_store_app/Service/bloc/products/products_bloc.dart';
@@ -19,15 +22,15 @@ class AllProductsScreen extends StatefulWidget {
 class _AllProductsScreenState extends State<AllProductsScreen> {
   late final ProductsBloc _productsBloc;
   late final ProductsRepository _productsRepository;
+  List<ProductModel> productsCart = [];
+  List<String> categories = ['Todos'];
+  String selectedCategory = 'Todos';
 
   @override
   void initState() {
     super.initState();
-    // Inicializa o repositório
     _productsRepository = ProductsRepository();
-    // Cria o BLoC passando o repositório correto (não o próprio _sellerScreenBloc!)
     _productsBloc = ProductsBloc(repository: _productsRepository);
-    // Dispara o evento para buscar os usuários da API
     _productsBloc.add(GetAllProducts());
   }
 
@@ -40,52 +43,76 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          Theme.of(context).colorScheme.primary, // fundo azul escuro
+      backgroundColor: Theme.of(context).colorScheme.primary,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Logo e título centralizados
-            AppHeaderProducts(),
-            // Linha verde abaixo do título
+            AppHeaderProducts(
+              searchActive: true,
+              onSearch: (query) {
+                _productsBloc.add(SearchProducts(query: query));
+              },
+              productsCart: productsCart,
+            ),
             Container(
               height: 2,
               width: double.infinity,
               margin: const EdgeInsets.symmetric(horizontal: 16),
-              color: Colors.green,
+              color: AppTheme.primaryColor,
+            ),
+            const SizedBox(height: 8),
+            CategoryFilter(
+              categories: categories,
+              selectedCategory: selectedCategory,
+              onCategorySelected: (category) {
+                setState(() {
+                  selectedCategory = category;
+                });
+                _productsBloc.add(FilterProductsByCategory(category: category));
+              },
             ),
             const SizedBox(height: 16),
-            // Bloco responsável por exibir a lista de usuários
             Expanded(
               child: BlocBuilder<ProductsBloc, ProductsState>(
                 bloc: _productsBloc,
                 builder: (context, state) {
-                  // Enquanto estiver carregando, exibe um indicador de progresso
                   if (state is ProductsLoadingState) {
                     return const Center(
                       child: CircularProgressIndicator(
                         valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                       ),
                     );
-                  }
-                  // Se os dados foram carregados, mapeia a lista para os widgets
-                  else if (state is ProductsLoadedState) {
+                  } else if (state is ProductsLoadedState) {
                     final products = state.productsData;
-                    return ListView.separated(
+
+                    if (categories.length == 1) {
+                      final uniqueCategories =
+                          products.map((e) => e.category).toSet().toList();
+
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        setState(() {
+                          categories.addAll(uniqueCategories);
+                        });
+                      });
+                    }
+
+                    return GridView.builder(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: MediaQuery.of(context).size.width /
+                            (MediaQuery.of(context).size.height * 0.8),
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                      ),
                       itemCount: products.length,
-                      separatorBuilder: (context, index) =>
-                          const SizedBox(height: 8),
                       itemBuilder: (context, index) {
-                        // Para cada usuário, passamos os dados para o SellersListTile
-                        print(products[index]);
-                        return ProductCard(productData: products[index]);
+                        return ProductCard(
+                            productData: products[index], cart: productsCart);
                       },
                     );
-                  }
-                  // Em caso de erro, exibe uma mensagem adequada
-                  else if (state is ProductsErrorState) {
+                  } else if (state is ProductsErrorState) {
                     WidgetsBinding.instance.addPostFrameCallback((_) {
                       if (state.exception is ApiErrorException) {
                         final error = state.exception as ApiErrorException;
@@ -93,13 +120,12 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                             "${error.statusCode} - ${error.errorDescription}",
                             context);
                       } else {
-                        print(state.exception.toString());
                         Alerts.showErrorSnackBar(
                             "${state.exception.toString()}", context);
                       }
                     });
                   }
-                  // Estado padrão (caso nenhum seja acionado)
+
                   return const SizedBox();
                 },
               ),
