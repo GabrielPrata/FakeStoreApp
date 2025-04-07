@@ -1,5 +1,4 @@
 import 'package:fake_store_app/Domain/cart_model.dart';
-import 'package:fake_store_app/Domain/product_model.dart';
 import 'package:fake_store_app/Presentation/all_products_screen.dart';
 import 'package:fake_store_app/Presentation/style/app_theme.dart';
 import 'package:fake_store_app/Presentation/widgets/app_header_products.dart';

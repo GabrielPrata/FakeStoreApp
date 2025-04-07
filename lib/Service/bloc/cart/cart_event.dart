@@ -1,5 +1,4 @@
 import 'package:fake_store_app/Domain/cart_model.dart';
-import 'package:flutter/material.dart';
 
 abstract class CartEvent {}
 

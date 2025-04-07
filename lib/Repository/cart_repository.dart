@@ -1,10 +1,8 @@
 import 'dart:convert';
 import 'package:fake_store_app/Domain/cart_model.dart';
 import 'package:fake_store_app/Domain/product_model.dart';
-import 'package:fake_store_app/Presentation/widgets/product_card.dart';
 import 'package:fake_store_app/util/api_error_model.dart';
 import 'package:fake_store_app/util/constants.dart';
-import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 

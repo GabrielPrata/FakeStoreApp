@@ -1,9 +1,7 @@
-import 'package:fake_store_app/Domain/auth_model.dart';
 import 'package:fake_store_app/Presentation/admin_screen.dart';
 import 'package:fake_store_app/Presentation/select_seller_screen.dart';
 import 'package:fake_store_app/Repository/auth_repository.dart';
 import 'package:fake_store_app/Service/bloc/auth/auth_bloc.dart';
-import 'package:fake_store_app/Service/bloc/auth/auth_event.dart';
 import 'package:fake_store_app/Service/bloc/auth/auth_state.dart';
 import 'package:fake_store_app/util/alerts.dart';
 import 'package:fake_store_app/util/api_error_model.dart';

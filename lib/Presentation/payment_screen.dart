@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'dart:math';
-
 import 'package:fake_store_app/Domain/cart_model.dart';
 import 'package:fake_store_app/Domain/product_model.dart';
 import 'package:fake_store_app/Domain/user_model.dart';
