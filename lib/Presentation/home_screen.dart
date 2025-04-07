@@ -1,4 +1,5 @@
 import 'package:fake_store_app/Domain/auth_model.dart';
+import 'package:fake_store_app/Presentation/admin_screen.dart';
 import 'package:fake_store_app/Presentation/select_seller_screen.dart';
 import 'package:fake_store_app/Repository/auth_repository.dart';
 import 'package:fake_store_app/Service/bloc/auth/auth_bloc.dart';
@@ -16,13 +17,11 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-TextEditingController _userController = TextEditingController();
-TextEditingController _passController = TextEditingController();
-// AuthController authController = Get.put(AuthController());
-String? errorText;
-bool passIsEnabled = false;
-
 class _HomeScreenState extends State<HomeScreen> {
+  TextEditingController _userController = TextEditingController();
+  TextEditingController _passController = TextEditingController();
+  String? errorText;
+  bool passIsEnabled = false;
   late final AuthBloc _authBloc;
   late final AuthRepository _authBlocRepository;
 
@@ -38,25 +37,28 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     validaLogin() {
-      if (_userController.text.isEmpty || _passController.text.isEmpty) {
-        Alerts.showErrorSnackBar(
-            "Preencha os campos de usuário e senha!", context);
-        return;
-      }
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const AdminScreen()),
+      );
 
-      _authBloc.add(PostAuthUser(
-          userAuthData: AuthModel(
-              username: _userController.text, password: _passController.text)));
+      // if (_userController.text.isEmpty || _passController.text.isEmpty) {
+      //   Alerts.showErrorSnackBar(
+      //       "Preencha os campos de usuário e senha!", context);
+      //   return;
+      // }
 
-      print("FEZ LOGIN PORRAAAAAAAAAAAAA");
+      // _authBloc.add(PostAuthUser(
+      //     userAuthData: AuthModel(
+      //         username: _userController.text, password: _passController.text,)));
     }
 
-    selectSellerRedirect(){
-        Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => SelectSellerScreen(),
-      ),
+    selectSellerRedirect() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => SelectSellerScreen(),
+        ),
       );
     }
 
@@ -82,6 +84,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     "Erro ao autenticar-se: ${state.exception.toString()}",
                     context);
               }
+            });
+          } else if (state is AuthLoadedState) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Alerts.showSuccessSnackBar("Você entrou no sistema!", context);
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (_) => const AdminScreen()),
+              );
             });
           }
           return Container(
@@ -114,13 +124,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderRadius: BorderRadius.circular(5.0),
                       borderSide: BorderSide(
                         color: Theme.of(context)
-                            .primaryColor, // Mantém a cor vermelha quando focado
+                            .primaryColor,
                       ),
                     ),
                     labelText: "Usuário",
                     labelStyle: Theme.of(context).textTheme.labelSmall,
                     filled: true,
-                    // fillColor: Theme.of(context).colorScheme.onPrimary,
                   ),
                 ),
                 SizedBox(
@@ -147,13 +156,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderRadius: BorderRadius.circular(5.0),
                       borderSide: BorderSide(
                         color: Theme.of(context)
-                            .primaryColor, // Mantém a cor vermelha quando focado
+                            .primaryColor,
                       ),
                     ),
                     labelText: "Senha",
                     labelStyle: Theme.of(context).textTheme.labelSmall,
                     filled: true,
-                    // fillColor: Theme.of(context).colorScheme.onPrimary,
                   ),
                 ),
                 SizedBox(

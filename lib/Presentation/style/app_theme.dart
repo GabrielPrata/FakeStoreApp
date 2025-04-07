@@ -87,8 +87,8 @@ class AppTheme {
           minimumSize: WidgetStatePropertyAll<Size>(Size(double.infinity, 50)),
           side: WidgetStatePropertyAll(
             BorderSide(
-              color: Colors.white, // Cor da borda
-              width: 1.0, // Largura da borda
+              color: Colors.white,
+              width: 1.0, 
             ),
           ),
         ),

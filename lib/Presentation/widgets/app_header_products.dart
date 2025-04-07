@@ -1,5 +1,6 @@
 import 'package:fake_store_app/Domain/product_model.dart';
 import 'package:fake_store_app/Presentation/cart_screen.dart';
+import 'package:fake_store_app/Presentation/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class AppHeaderProducts extends StatefulWidget {
@@ -7,12 +8,14 @@ class AppHeaderProducts extends StatefulWidget {
   final ValueChanged<String>? onSearch;
   final List<ProductModel>? productsCart;
   final String? headerTitle;
+  final bool isAdmin;
 
   const AppHeaderProducts(
       {Key? key,
       required this.searchActive,
       this.onSearch,
       this.productsCart,
+      this.isAdmin = false,
       this.headerTitle})
       : super(key: key);
 
@@ -62,15 +65,26 @@ class _AppHeaderProductsState extends State<AppHeaderProducts> {
                     Icons.arrow_back,
                     color: Colors.white,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    if (!widget.isAdmin) {
+                      Navigator.pop(context);
+                    } else {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              HomeScreen(),
+                        ),
+                      );
+                    }
+                  },
                 ),
           widget.searchActive
               ? Expanded(
                   child: _isSearching
                       ? TextField(
                           controller: _controller,
-                          onSubmitted:
-                              widget.onSearch, // <- Ao pressionar "Enter"
+                          onSubmitted: widget.onSearch,
                           style: const TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                             hintText: 'Buscar por título ou ID...',
@@ -81,8 +95,7 @@ class _AppHeaderProductsState extends State<AppHeaderProducts> {
                                   const Icon(Icons.search, color: Colors.white),
                               onPressed: () {
                                 final query = _controller.text.trim();
-                                widget
-                                    .onSearch!(query); // <- Ao clicar no ícone
+                                widget.onSearch!(query);
                               },
                             ),
                           ),

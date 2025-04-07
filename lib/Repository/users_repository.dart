@@ -14,12 +14,10 @@ class UsersRepository {
     );
 
     if (response.statusCode == 200) {
-      // Decodifica a resposta JSON que é uma lista
       final List<dynamic> jsonList = jsonDecode(response.body);
 
-      // Mapeia cada item do JSON para um objeto UserModel
       final List<UserModel> users = jsonList
-          .map((jsonItem) => UserModel.fromJson(jsonItem as Map<String, dynamic>))
+          .map((jsonItem) => UserModel.fromApiJson(jsonItem as Map<String, dynamic>))
           .toList();
 
       return users;

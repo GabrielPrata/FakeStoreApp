@@ -38,15 +38,13 @@ class _SelectSellerScreenState extends State<SelectSellerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
       backgroundColor:
-          Theme.of(context).colorScheme.primary, // fundo azul escuro
+          Theme.of(context).colorScheme.primary,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Logo e título centralizados
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12.0),
               child: Row(
@@ -60,7 +58,7 @@ class _SelectSellerScreenState extends State<SelectSellerScreen> {
                   const SizedBox(width: 12),
                   Text(
                     "Quem está usando o App?",
-                    style: textTheme.titleSmall?.copyWith(
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
@@ -68,7 +66,6 @@ class _SelectSellerScreenState extends State<SelectSellerScreen> {
                 ],
               ),
             ),
-            // Linha verde abaixo do título
             Container(
               height: 2,
               width: double.infinity,
@@ -76,12 +73,10 @@ class _SelectSellerScreenState extends State<SelectSellerScreen> {
               color: Colors.green,
             ),
             const SizedBox(height: 16),
-            // Bloco responsável por exibir a lista de usuários
             Expanded(
               child: BlocBuilder<UsersBloc, UsersState>(
                 bloc: _usersBloc,
                 builder: (context, state) {
-                  // Enquanto estiver carregando, exibe um indicador de progresso
                   if (state is UsersLoadingState) {
                     return const Center(
                       child: CircularProgressIndicator(
@@ -89,7 +84,6 @@ class _SelectSellerScreenState extends State<SelectSellerScreen> {
                       ),
                     );
                   }
-                  // Se os dados foram carregados, mapeia a lista para os widgets
                   else if (state is UsersLoadedState) {
                     final sellers = state.sellersData;
                     return ListView.separated(
@@ -98,12 +92,10 @@ class _SelectSellerScreenState extends State<SelectSellerScreen> {
                       separatorBuilder: (context, index) =>
                           const SizedBox(height: 8),
                       itemBuilder: (context, index) {
-                        // Para cada usuário, passamos os dados para o SellersListTile
                         return SellersListTile(sellerData: sellers[index]);
                       },
                     );
                   }
-                  // Em caso de erro, exibe uma mensagem adequada
                   else if (state is UsersErrorState) {
                     WidgetsBinding.instance.addPostFrameCallback((_) {
                       if (state.exception is ApiErrorException) {
@@ -123,7 +115,6 @@ class _SelectSellerScreenState extends State<SelectSellerScreen> {
                       ),
                     );
                   }
-                  // Estado padrão (caso nenhum seja acionado)
                   return const SizedBox();
                 },
               ),

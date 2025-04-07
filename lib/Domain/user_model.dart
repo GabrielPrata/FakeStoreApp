@@ -15,12 +15,23 @@ class UserModel extends AuthModel {
     required String password,
   }) : super(username: username, password: password);
 
-  factory UserModel.fromJson(Map<String, dynamic> json) {
+  factory UserModel.fromApiJson(Map<String, dynamic> json) {
     return UserModel(
       id: json['id'],
       email: json['email'],
       firstName: json['name'] != null ? json['name']['firstname'] : '',
       lastName: json['name'] != null ? json['name']['lastname'] : '',
+      username: json['username'],
+      password: json['password'],
+    );
+  }
+
+  factory UserModel.fromGetXJson(Map<String, dynamic> json) {
+    return UserModel(
+      id: json['id'],
+      email: json['email'],
+      firstName: json['name'],
+      lastName: json['lastname'],
       username: json['username'],
       password: json['password'],
     );

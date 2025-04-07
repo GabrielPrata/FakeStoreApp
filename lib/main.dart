@@ -1,8 +1,10 @@
 import 'package:fake_store_app/Presentation/home_screen.dart';
 import 'package:fake_store_app/Presentation/style/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
+void main() async {
+   await GetStorage.init();
   runApp(const MyApp());
 }
 

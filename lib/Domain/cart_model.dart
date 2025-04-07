@@ -10,4 +10,9 @@ class CartModel {
     required this.userId,
     required this.products,
   });
+  CartModel.empty()
+      : id = 0,
+        userId = 0,
+        products = [];
+
 }

@@ -13,11 +13,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AllProductsScreen extends StatefulWidget {
-  const AllProductsScreen({Key? key}) : super(key: key);
+  final List<ProductModel>? productsCartWidget;
+
+  const AllProductsScreen({Key? key, this.productsCartWidget}) : super(key: key);
 
   @override
   _AllProductsScreenState createState() => _AllProductsScreenState();
 }
+
 
 class _AllProductsScreenState extends State<AllProductsScreen> {
   late final ProductsBloc _productsBloc;
@@ -42,6 +45,9 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if(widget.productsCartWidget != null) {
+      productsCart = widget.productsCartWidget!;
+    }
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       body: SafeArea(

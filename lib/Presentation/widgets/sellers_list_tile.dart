@@ -18,7 +18,6 @@ class _SellersListTileState extends State<SellersListTile> {
   saveSellerDataInStorage(UserModel sellerData) async {
     GetStorage box = GetStorage();
     box.write('sellerData', sellerData.toJson());
-
     Navigator.push(
       context,
       MaterialPageRoute(

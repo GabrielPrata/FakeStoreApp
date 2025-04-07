@@ -65,6 +65,28 @@ class _ProductCardState extends State<ProductCard> {
                     widget.productData.image,
                     width: double.infinity,
                     height: 100,
+                    fit: BoxFit.contain,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return SizedBox(
+                        height: 100,
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            value: loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                    (loadingProgress.expectedTotalBytes ?? 1)
+                                : null,
+                            strokeWidth: 2,
+                          ),
+                        ),
+                      );
+                    },
+                    errorBuilder: (context, error, stackTrace) => SizedBox(
+                      height: 100,
+                      child: Center(
+                        child: Icon(Icons.broken_image, color: Colors.grey),
+                      ),
+                    ),
                   ),
                 ),
                 SizedBox(height: 10),

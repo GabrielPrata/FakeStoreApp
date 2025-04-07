@@ -13,7 +13,7 @@ class ProductDetailsBottomsheet extends StatelessWidget {
     return FractionallySizedBox(
       heightFactor: 0.9,
       child: Container(
-        color: AppTheme.background, // Fundo azul escuro
+        color: AppTheme.background,
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(20),
@@ -27,7 +27,6 @@ class ProductDetailsBottomsheet extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                // Card da imagem
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
@@ -46,7 +45,6 @@ class ProductDetailsBottomsheet extends StatelessWidget {
 
                 const SizedBox(height: 16),
 
-                // Card da descrição
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(

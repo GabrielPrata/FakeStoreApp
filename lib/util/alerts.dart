@@ -8,8 +8,6 @@ import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quickalert/quickalert.dart';
 
-// VibrationController vibrationController = Get.put(VibrationController());
-// CollectController collController = Get.put(CollectController());
 
 class Alerts {
   static showErrorSnackBar(String message, BuildContext context) {
@@ -23,7 +21,6 @@ class Alerts {
         ),
       );
     } else {
-      // Optionally handle the case where no overlay is found
       print("No overlay found in current context.");
     }
   }
@@ -38,7 +35,6 @@ class Alerts {
         ),
       );
     } else {
-      // Optionally handle the case where no overlay is found
       print("No overlay found in current context.");
     }
   }
@@ -53,35 +49,9 @@ class Alerts {
         ),
       );
     } else {
-      // Optionally handle the case where no overlay is found
       print("No overlay found in current context.");
     }
   }
-
-  // static showAlertLogoutDialog(BuildContext context) {
-  //   AlertDialog alert = AlertDialog(
-  //     title: Text("Você realmente deseja sair do app?",
-  //         style: GoogleFonts.montserrat(
-  //             fontWeight: FontWeight.w600, fontSize: 23)),
-  //     actions: [
-  //       TextButton(
-  //           onPressed: () async => await AuthController.logout(),
-  //           child: Text("Sair",
-  //               style: GoogleFonts.montserrat(
-  //                   fontWeight: FontWeight.w600, fontSize: 19))),
-  //       TextButton(
-  //           onPressed: () => Get.back(),
-  //           child: Text("Voltar",
-  //               style: GoogleFonts.montserrat(
-  //                   fontWeight: FontWeight.w600, fontSize: 19)))
-  //     ],
-  //   );
-  //   showDialog(
-  //       context: context,
-  //       builder: (BuildContext context) {
-  //         return alert;
-  //       });
-  // }
 
   static showAlertConfirmDialog(
       BuildContext context, String data, Function action) {
@@ -114,170 +84,6 @@ class Alerts {
           return alert;
         });
   }
-
-  // static showAlertConfirmDialogMusic(
-  //     BuildContext context, MusicAdapter track, Function action) {
-  //   AlertDialog alert = AlertDialog(
-  //     backgroundColor: Colors.grey.shade300,
-  //     title: Text(
-  //       "Você realmente deseja adicionar essa música?",
-  //       style: Theme.of(context)
-  //           .textTheme
-  //           .labelSmall
-  //           ?.copyWith(color: Colors.black, fontSize: 20),
-  //       textAlign: TextAlign.center,
-  //     ),
-  //     content: SingleChildScrollView(
-  //       // Usando SingleChildScrollView para evitar overflow
-  //       child: Column(
-  //         mainAxisSize: MainAxisSize.min, // Para manter o conteúdo compacto
-  //         children: [
-  //           if (track.imageUrl != null) // Mostrar a imagem se disponível
-  //             Image.network(
-  //               track.imageUrl!,
-  //               width: 120,
-  //               height: 120,
-  //               fit: BoxFit.cover,
-  //             ),
-  //           SizedBox(
-  //             height: 10,
-  //           ),
-  //           Text(
-  //             track.musicName, // Nome da música
-  //             textAlign: TextAlign.center,
-  //             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-  //                 color: Colors.black,
-  //                 fontWeight: FontWeight.w600,
-  //                 fontSize: 20),
-  //           ),
-  //           if (track.albumName !=
-  //               null) // Mostrar o nome do álbum se disponível
-  //             Padding(
-  //               padding: const EdgeInsets.only(top: 2.0),
-  //               child: Text(
-  //                 "Álbum: ${track.albumName}",
-  //                 textAlign: TextAlign.center,
-  //                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-  //                       color: Colors.grey.shade700,
-  //                       fontSize: 16,
-  //                     ),
-  //               ),
-  //             ),
-  //           Padding(
-  //             padding: const EdgeInsets.only(top: 2.0),
-  //             child: Text(
-  //               "Artistas: ${track.convertArtistListoToString()}", // Lista de artistas
-  //               textAlign: TextAlign.center,
-  //               style: Theme.of(context)
-  //                   .textTheme
-  //                   .bodySmall
-  //                   ?.copyWith(color: Colors.grey.shade700, fontSize: 16),
-  //             ),
-  //           ),
-  //           SizedBox(
-  //             height: 10,
-  //           )
-  //         ],
-  //       ),
-  //     ),
-  //     actions: [
-  //       ElevatedButton(
-  //         style: ElevatedButton.styleFrom(backgroundColor: Colors.red.shade500),
-  //         onPressed: () => Get.back(),
-  //         child: Row(
-  //           mainAxisSize: MainAxisSize.min,
-  //           children: [
-  //             Icon(
-  //               Icons.close,
-  //               color: Colors.white,
-  //             ),
-  //             SizedBox(
-  //               height: 20,
-  //             ),
-  //             Text(
-  //               "Não",
-  //               style: Theme.of(context).textTheme.labelMedium?.copyWith(
-  //                     color: Colors.white,
-  //                     fontSize: 16,
-  //                   ),
-  //             ),
-  //           ],
-  //         ),
-  //       ),
-  //       SizedBox(
-  //         height: 5,
-  //       ),
-  //       ElevatedButton(
-  //         onPressed: () => action(),
-  //         child: Row(
-  //           mainAxisSize: MainAxisSize.min,
-  //           children: [
-  //             Icon(
-  //               Icons.check,
-  //               color: Colors.white,
-  //             ),
-  //             SizedBox(
-  //               height: 20,
-  //             ),
-  //             Text(
-  //               "Sim!",
-  //               style: Theme.of(context).textTheme.labelMedium?.copyWith(
-  //                     color: Colors.white,
-  //                     fontSize: 16,
-  //                   ),
-  //             ),
-  //           ],
-  //         ),
-  //         style:
-  //             ElevatedButton.styleFrom(backgroundColor: Colors.green.shade500),
-  //       )
-  //     ],
-  //   );
-
-  //   showDialog(
-  //       context: context,
-  //       builder: (BuildContext context) {
-  //         return alert;
-  //       });
-  // }
-
-  // static Widget boxLoading(BuildContext context, String title) {
-  //   return Container(
-  //       decoration: BoxDecoration(
-  //           color: AppColors.colorPrimary.withOpacity(0.8),
-  //           borderRadius: BorderRadius.circular(15)),
-  //       width: MediaQuery.of(context).size.width * 0.8,
-  //       height: 200,
-  //       child: Column(
-  //         mainAxisAlignment: MainAxisAlignment.center,
-  //         children: [
-  //           SizedBox(
-  //               width: MediaQuery.of(context).size.width * 0.5,
-  //               child: const LinearProgressIndicator(minHeight: 6,)),
-  //           Padding(
-  //             padding: const EdgeInsets.all(8.0),
-  //             child: Text(
-  //               title,
-  //               style: GoogleFonts.passionOne(
-  //                   color: Colors.white,
-  //                   fontWeight: FontWeight.w600,
-  //                   fontSize: 27),
-  //             ),
-  //           )
-  //         ],
-  //       ));
-  // }
-
-  // static Future<dynamic> quickSuccessAlert2(BuildContext context, String message) {
-  //   return QuickAlert.show(
-  //     context: context,
-  //     type: QuickAlertType.success,
-  //     onConfirmBtnTap: () => Get.to(HomePage()),
-  //     showCancelBtn: true,
-  //     confirmBtnText: 'OK',
-  //     text: message,
-  //   );
-  // }
 
   static Future<dynamic> quickSuccessAlert(
       BuildContext context, String message) {

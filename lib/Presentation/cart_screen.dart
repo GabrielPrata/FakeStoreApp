@@ -13,7 +13,6 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Agrupando por produto e contando quantidade
     final Map<ProductModel, int> groupedProducts = {};
     for (var product in productsCart) {
       groupedProducts[product] = (groupedProducts[product] ?? 0) + 1;
@@ -32,13 +31,13 @@ class CartScreen extends StatelessWidget {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => PaymentScreen(totalPrice: totalPrice,),
+          builder: (context) => PaymentScreen(totalPrice: totalPrice, productsCart: productsCart,),
         ),
       );
     }
 
     return Scaffold(
-      backgroundColor: AppTheme.background, // Fundo azul escuro
+      backgroundColor: AppTheme.background,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16),
